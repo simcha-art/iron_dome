@@ -73,4 +73,3 @@
 ```
 npm i
 docker compose up -d
-docker exec -it IRON_DOME mysql -uroot -proot
