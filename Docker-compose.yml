@@ -3,31 +3,38 @@ services:
     image: mysql:9
     container_name: iron_dome_mysql
     restart: always
+
     env_file:
       - db.env
+
     ports:
       - "3306:3306"
 
     volumes:
-      - iromDomeMysql:/var/lib/mysql
+      - ironDomeMysql:/var/lib/mysql
 
   app:
     build: ./
     container_name: iron_dome_server
+    working_dir: /app
     depends_on:
       - mysql
-    working_dir: /app
-    volumes:
-      - "./:/app"
-    ports:
-     - "3000:3000"
+    restart: always
+
     env_file:
       - .env
 
+    ports:
+      - "3000:3000"
 
-
+    volumes:
+      - ./:/app
 
 volumes:
-  iromDomeMysql:
+  ironDomeMysql:
+    
 
 
+  
+
+  

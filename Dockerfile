@@ -8,5 +8,4 @@ RUN npm i
 
 COPY . .
 
-
-CMD [ "node", "--watch" ,"app.js" ]
+CMD [ "node", "--watch", "app.js" ]
