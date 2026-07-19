@@ -20,8 +20,8 @@ app.get("/health", (req, res) => {
     res.end("Server is on");
 });
 
-app.use("/operators", (req, res, next) => operatorsRouter(req, res, next));
-app.use("/incidents", (req, res, next) => incidentRouter(req, res, next));
+app.use("/operators", operatorsRouter);
+app.use("/incidents", incidentRouter);
 
 app.use(handleErrors);
 
