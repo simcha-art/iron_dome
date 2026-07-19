@@ -71,5 +71,4 @@
 # HOW TO RUN
 
 ```
-npm i
 docker compose up -d
