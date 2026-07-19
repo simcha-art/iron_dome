@@ -21,7 +21,7 @@ function baseRepo(tableName) {
     }
 
     async function get(filter) {
-        const queryFilter = filter ? "WHRER" + Object.keys(filter).map(key => `${key}=?`).join(" AND "): "";
+        const queryFilter = filter ? "WHERE " + Object.keys(filter).map(key => `${key}=?`).join(" AND "): "";
         const values = filter ? Object.values(filter): undefined
         const query = `SELECT * FROM ${tableName} ${queryFilter}`
         const [result] = await pool.execute(query, values)
