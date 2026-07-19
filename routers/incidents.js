@@ -35,7 +35,9 @@ router.post("/", async (req, res, next) => {
             operator_id,
             incident_id: newId,
         });
-        return res.json(success(`incident ${newId} for operator ${operator_id} created`))
+        return res.json(
+            success(`incident ${newId} for operator ${operator_id} created`),
+        );
     } catch (error) {
         next(error);
     }
@@ -43,24 +45,35 @@ router.post("/", async (req, res, next) => {
 
 router.patch("/:id/status", async (req, res, next) => {
     try {
-    const id = +req.params.id;
-    const {status} = req.body;
-    console.log(`id: ${id}, status: ${status}`)
-    let errMsg;
-    if (Number.isNaN(id)) {
-        errMsg = "id is required, and it must be a number"
-    } else if (!status) {
-        errMsg = "status is required (OPEN, TRACKING, INTERCEPTED, CLOSED)"
-    }
-    if (errMsg) {
-        const error = new Error(errMsg)
-        error.status = 400
-        throw error
-    }
+        const id = +req.params.id;
+        const { status } = req.body;
+        console.log(`id: ${id}, status: ${status}`);
+        let errMsg;
+        if (Number.isNaN(id)) {
+            errMsg = "id is required, and it must be a number";
+        } else if (!status) {
+            errMsg = "status is required (OPEN, TRACKING, INTERCEPTED, CLOSED)";
+        }
+        if (errMsg) {
+            const error = new Error(errMsg);
+            error.status = 400;
+            throw error;
+        }
 
-    const rowsAffected = await incidentsRepo.update(id, {status})
-    res.json(success(`incident ${id} updated successfully`))
+        const rowsAffected = await incidentsRepo.update(id, { status });
+        res.json(success(`incident ${id} updated successfully`));
     } catch (error) {
-        next(error)
+        next(error);
     }
-})
+});
+
+router.get("/open", async (req, res, next) => {
+    try {
+        const opens = await incidentsRepo.get({ status: "OPEN" });
+        const trackings = await incidentsRepo.get({ status: "TRACKING" });
+        const all_opens = [...opens, ...trackings]
+        res.json(success(all_opens));
+    } catch (error) {
+        next(error);
+    }
+});
