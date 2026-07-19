@@ -10,11 +10,11 @@
 
 ---
 
-| FEILD | CONSTRAINT                      | GOAL  |
-| ----- | ------------------------------- | ----- |
-| id    | int primary key, auto_increment | מזהה  |
-| name  | varchar(100)                    | שם    |
-| rank  | varchar(100)                    | תפקיד |
+| FEILD         | CONSTRAINT                      | GOAL  |
+| ------------- | ------------------------------- | ----- |
+| id            | int primary key, auto_increment | מזהה  |
+| name          | varchar(100)                    | שם    |
+| operator_rank | varchar(100)                    | תפקיד |
 
 ---
 
@@ -67,8 +67,8 @@
 
 ---
 
-
 # HOW TO RUN
 
 ```
 docker compose up -d
+```

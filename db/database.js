@@ -1,11 +1,11 @@
 import mysql from "mysql2/promise";
 
 const pool = await mysql.createPool({
-    host: "mysql",
-    port: 3306,
-    user: "root",
-    password: "root",
-    database: "iron_dome",
+    host: process.env.DB_HOST,
+    port: process.env.MY_DB_PORT,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_ROOT_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
 });
 
-export default pool
+export default pool;
