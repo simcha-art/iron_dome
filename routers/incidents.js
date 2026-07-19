@@ -61,6 +61,11 @@ router.patch("/:id/status", async (req, res, next) => {
         }
 
         const rowsAffected = await incidentsRepo.update(id, { status });
+        if (rowsAffected === 0) {
+            const error = new Error(`incident ${id} not found`)
+            error.status = 404
+            throw error
+        }
         res.json(success(`incident ${id} updated successfully`));
     } catch (error) {
         next(error);
